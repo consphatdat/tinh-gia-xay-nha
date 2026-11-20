@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tính giá xây nhà sơ bộ | Xây Dựng Phát Đạt</title>
+<meta name="description" content="Nhập kích thước đất, số tầng và gói vật tư để xem báo giá xây nhà sơ bộ. Tư vấn báo giá, dự toán miễn phí.">
+<style>
+  :root { --cam:#f58220; --nen:#101014; --the:#1b1b21; --vien:#2e2e36; --chu:#f2f2f4; --mo:#b9b9c0; --xanh:#5ad282; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--nen); color:var(--chu); font:16px/1.5 "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif; }
+  .soc { height:14px; background:repeating-linear-gradient(-45deg, var(--cam) 0 14px, var(--nen) 14px 28px); }
+  main { max-width:760px; margin:0 auto; padding:20px 16px 48px; }
+  .hieu { color:var(--cam); font-weight:700; letter-spacing:.06em; font-size:14px; margin:8px 0 4px; }
+  h1 { font-size:30px; line-height:1.2; margin:0 0 8px; }
+  p.dan { color:var(--mo); margin:0 0 20px; }
+  section { background:var(--the); border:1px solid var(--vien); border-radius:14px; padding:18px; margin-bottom:16px; }
+  h2 { font-size:18px; margin:0 0 14px; color:var(--cam); }
+  .luoi { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  @media (max-width:560px) { .luoi { grid-template-columns:1fr; } h1 { font-size:25px; } }
+  label { display:block; font-size:14px; color:var(--mo); margin-bottom:5px; }
+  input, select { width:100%; padding:11px 12px; border-radius:9px; border:1px solid var(--vien); background:#121217; color:var(--chu); font:inherit; }
+  input:focus, select:focus { outline:2px solid var(--cam); outline-offset:1px; }
+  small { color:var(--mo); font-size:13px; }
+  table { width:100%; border-collapse:collapse; font-size:15px; }
+  td, th { padding:8px 6px; border-bottom:1px solid var(--vien); text-align:right; }
+  td:first-child, th:first-child { text-align:left; }
+  th { color:var(--mo); font-weight:600; font-size:13px; }
+  .tong { background:var(--cam); color:#141414; border-radius:12px; padding:16px; margin-top:16px; text-align:center; }
+  .tong .so { font-size:34px; font-weight:800; line-height:1.15; }
+  .tong .phu { font-size:14px; font-weight:600; }
+  .chia { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px; }
+  .o { border:1px solid var(--vien); border-radius:10px; padding:12px; }
+  .o b { display:block; font-size:20px; }
+  ul { margin:0; padding-left:20px; color:var(--mo); font-size:14px; }
+  li { margin-bottom:6px; }
+  a.nut { display:block; text-align:center; background:var(--xanh); color:#10140f; font-weight:800; font-size:18px; padding:15px; border-radius:12px; text-decoration:none; margin-top:14px; }
+  a.nut:focus, a.nut:hover { filter:brightness(1.08); }
+  footer { color:var(--mo); font-size:13px; text-align:center; margin-top:22px; }
+</style>
+</head>
+<body>
+<div class="soc"></div>
+<main>
+  <div class="hieu">XÂY DỰNG PHÁT ĐẠT</div>
+  <h1>Tính giá xây nhà sơ bộ</h1>
+  <p class="dan">Nhập thông tin nhà bạn, kết quả hiện ngay bên dưới. Đây là giá tham khảo; báo giá chính thức cần bản vẽ và khảo sát.</p>
+
+  <section>
+    <h2>1. Thông tin nhà</h2>
+    <div class="luoi">
+      <div><label for="kv">Khu vực xây</label>
+        <select id="kv">
+          <option value="BTN">Phan Thiết, Bình Thuận cũ</option>
+          <option value="LDG">Đà Lạt, Lâm Đồng cũ</option>
+          <option value="DCN">Gia Nghĩa, Đắk Nông cũ</option>
+        </select></div>
+      <div><label for="tang">Số tầng (không kể tum)</label>
+        <select id="tang"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option></select></div>
+      <div><label for="rong">Chiều rộng nhà (m)</label><input id="rong" type="number" inputmode="decimal" min="2" step="0.1" value="5"></div>
+      <div><label for="dai">Chiều dài nhà (m)</label><input id="dai" type="number" inputmode="decimal" min="2" step="0.1" value="20"></div>
+      <div><label for="mong">Loại móng</label>
+        <select id="mong">
+          <option value="0.3">Móng đơn (tính 30% diện tích)</option>
+          <option value="0.5" selected>Móng băng (tính 50%)</option>
+          <option value="0.5">Móng cọc (tính 50%, chưa gồm cọc)</option>
+        </select></div>
+      <div><label for="mai">Loại mái</label>
+        <select id="mai">
+          <option value="0.3">Mái tôn (tính 30% diện tích)</option>
+          <option value="0.5">Mái ngói (tính 50%)</option>
+          <option value="0.5" selected>Mái bê tông cốt thép (tính 50%)</option>
+        </select></div>
+      <div><label for="tum">Diện tích tum (m², nếu có)</label><input id="tum" type="number" inputmode="decimal" min="0" step="1" value="0"></div>
+      <div><label for="bc">Diện tích ban công (m², nếu có)</label><input id="bc" type="number" inputmode="decimal" min="0" step="1" value="0"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>2. Gói vật tư</h2>
+    <div class="luoi">
+      <div><label for="tho">Phần thô và kết cấu</label>
+        <select id="tho"><option value="0">Phổ thông</option><option value="1">Khá</option><option value="2">Cao cấp</option></select></div>
+      <div><label for="ht">Phần hoàn thiện</label>
+        <select id="ht"><option value="0">Phổ thông</option><option value="1">Khá</option><option value="2">Cao cấp</option><option value="-1">Không làm hoàn thiện (chỉ xây thô)</option></select></div>
+    </div>
+    <small>Phần thô gồm móng, khung bê tông, tường, mái, điện nước âm. Phần hoàn thiện gồm gạch, sơn, cửa, đá, thiết bị điện và vệ sinh.</small>
+  </section>
+
+  <section aria-live="polite">
+    <h2>3. Kết quả</h2>
+    <table>
+      <thead><tr><th>Hạng mục</th><th>Diện tích</th><th>Hệ số</th><th>Tính tiền (m²)</th></tr></thead>
+      <tbody id="bang"></tbody>
+    </table>
+    <div class="tong"><div class="phu">TỔNG GIÁ SƠ BỘ (đã gồm thuế VAT)</div><div class="so" id="tong">0</div><div class="phu" id="m2"></div></div>
+    <div class="chia">
+      <div class="o"><small>Phần thô và kết cấu</small><b id="gtho">0</b><small id="dgtho"></small></div>
+      <div class="o"><small>Phần hoàn thiện</small><b id="ght">0</b><small id="dght"></small></div>
+    </div>
+    <a class="nut" id="nhan" href="https://m.me/61596577148236" target="_blank" rel="noopener">Nhắn kỹ sư để được tư vấn miễn phí</a>
+  </section>
+
+  <section>
+    <h2>Giá này chưa gồm</h2>
+    <ul>
+      <li>Ép cọc hoặc khoan cọc, xử lý nền đất yếu.</li>
+      <li>Phá dỡ nhà cũ, san lấp, vận chuyển phế thải.</li>
+      <li>Sân, cổng, hàng rào, mái che, bể ngầm.</li>
+      <li>Tủ bếp, nội thất rời, máy lạnh, rèm.</li>
+      <li>Thiết kế, xin phép xây dựng.</li>
+    </ul>
+    <p class="dan" style="margin:12px 0 0">Đơn giá tham khảo tháng 11/2026, tính trên diện tích quy đổi. Giá thực tế thay đổi theo nền đất, đường vào công trình, thiết kế và thời điểm.</p>
+  </section>
+
+  <footer>Xây Dựng Phát Đạt · Xây đúng, đủ, không phát sinh</footer>
+</main>
+<div class="soc"></div>
+
+<script>
+// Đơn giá đ/m² diện tích quy đổi, đã gồm VAT. Thứ tự: Phổ thông, Khá, Cao cấp.
+// Nguồn: bảng giá m² chuẩn của công cụ báo giá nhà dân (11/2026).
+const GIA = {
+  BTN: { tho: [4120000, 4300000, 4480000], ht: [1960000, 2130000, 2590000] },
+  LDG: { tho: [4250000, 4430000, 4610000], ht: [1960000, 2130000, 2590000] },
+  DCN: { tho: [4190000, 4370000, 4550000], ht: [1950000, 2130000, 2590000] },
+};
+const $ = id => document.getElementById(id);
+const so = id => Math.max(0, parseFloat($(id).value) || 0);
+const dt = x => x.toLocaleString("vi-VN", { maximumFractionDigits: 1 });
+function tien(x) {
+  if (x >= 1e9) return (x / 1e9).toLocaleString("vi-VN", { maximumFractionDigits: 2 }) + " tỷ";
+  return Math.round(x / 1e6).toLocaleString("vi-VN") + " triệu";
+}
+function tinh() {
+  const san = so("rong") * so("dai"), tang = parseInt($("tang").value, 10);
+  const dong = [
+    ["Móng", san, parseFloat($("mong").value)],
+    [tang + " tầng sàn", san * tang, 1],
+    ["Tum", so("tum"), 1],
+    ["Ban công", so("bc"), 0.7],
+    ["Mái", san, parseFloat($("mai").value)],
+  ].filter(d => d[1] > 0);
+  let qd = 0;
+  $("bang").innerHTML = dong.map(d => { const s = d[1] * d[2]; qd += s;
+    return `<tr><td>${d[0]}</td><td>${dt(d[1])}</td><td>${d[2].toLocaleString("vi-VN")}</td><td>${dt(s)}</td></tr>`; }).join("")
+    + `<tr><td><b>Diện tích quy đổi</b></td><td></td><td></td><td><b>${dt(qd)} m²</b></td></tr>`;
+  const g = GIA[$("kv").value], iTho = parseInt($("tho").value, 10), iHt = parseInt($("ht").value, 10);
+  const dgTho = g.tho[iTho], dgHt = iHt < 0 ? 0 : g.ht[iHt];
+  const tTho = qd * dgTho, tHt = qd * dgHt, tong = tTho + tHt;
+  $("gtho").textContent = tien(tTho);
+  $("dgtho").textContent = (dgTho / 1e6).toLocaleString("vi-VN") + " triệu/m² quy đổi";
+  $("ght").textContent = iHt < 0 ? "Không tính" : tien(tHt);
+  $("dght").textContent = iHt < 0 ? "" : (dgHt / 1e6).toLocaleString("vi-VN") + " triệu/m² quy đổi";
+  $("tong").textContent = tien(tong);
+  const sanTong = san * tang + so("tum");
+  $("m2").textContent = sanTong > 0 ? "Khoảng " + (tong / sanTong / 1e6).toLocaleString("vi-VN", { maximumFractionDigits: 1 }) + " triệu cho mỗi m² sàn" : "";
+}
+document.querySelectorAll("input, select").forEach(el => el.addEventListener("input", tinh));
+tinh();
+</script>
+</body>
+</html>
